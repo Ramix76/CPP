@@ -6,13 +6,14 @@
 #    By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/14 12:05:33 by framos-p          #+#    #+#              #
-#    Updated: 2023/10/23 11:07:40 by framos-p         ###   ########.fr        #
+#    Updated: 2023/10/26 15:10:22 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	phonebook
 
 SRCS		=	phonebook.cpp main.cpp contact.cpp
+
 OBJS		=	$(SRCS:%.cpp=%.o)
 
 CC			=	c++

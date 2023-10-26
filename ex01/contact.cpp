@@ -6,12 +6,11 @@
 /*   By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:54:58 by framos-p          #+#    #+#             */
-/*   Updated: 2023/10/26 12:15:43 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:16:53 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contact.hpp"
-
 
 Contact::Contact()
 {

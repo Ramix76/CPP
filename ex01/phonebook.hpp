@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:52:34 by framos-p          #+#    #+#             */
-/*   Updated: 2023/10/26 12:18:31 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:17:18 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 class Phonebook
 {
 	private:
-		Contact		contacts[3];
+		Contact		contacts[8];
 		int			numContacts;
 		int			counter;
 
@@ -31,6 +31,8 @@ class Phonebook
 		~Phonebook();
 		bool		addContact(Contact &newContact);
 		void		printContacts() const;
+		void		addContactToPhonebook(Phonebook &phonebook);
+		void		searchContacts(const Phonebook &phonebook);
 		int			getNumberOfContacts() const;
 		Contact		getContact(int index) const;
 };
