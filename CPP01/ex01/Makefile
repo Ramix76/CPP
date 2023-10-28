@@ -6,16 +6,15 @@
 #    By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/10/28 12:21:07 by framos-p         ###   ########.fr        #
+#    Updated: 2023/10/28 12:25:57 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Zombie
+NAME		=	zombieHorde
 
-SRCS		=	newZombie.cpp \
+SRCS		=	zombieHorde.cpp \
 			main.cpp \
 			Zombie.cpp \
-			randomChump.cpp
 
 CC			=	c++
 CFLAGS		=	-g -Wall -Wextra -Werror -std=c++98
