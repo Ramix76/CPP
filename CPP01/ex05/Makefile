@@ -6,13 +6,14 @@
 #    By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/10/30 14:48:52 by framos-p         ###   ########.fr        #
+#    Updated: 2023/10/30 14:54:17 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	replace
+NAME		=	Harl
 
 SRCS		=	main.cpp \
+				Harl.cpp \
 
 CC			=	c++
 CFLAGS		=	-g -Wall -Wextra -Werror -std=c++98
