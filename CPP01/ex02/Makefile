@@ -6,7 +6,7 @@
 #    By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/10/30 10:46:54 by framos-p         ###   ########.fr        #
+#    Updated: 2023/10/30 14:13:29 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) *.dSYM
 	@echo "\nName erased\n"
 
 re: fclean all
