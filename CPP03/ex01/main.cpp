@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 10:26:25 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/04 11:03:13 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:04:25 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 int	main()
 {
-	ScavTrap	scavtrap("S4V-TP");
+	ClapTrap	clap("CL4V-TP");
+	ScavTrap	scav("SC4V-TP");
 
-	scavtrap.attack("Intruder");
-	scavtrap.guardGate();
-	scavtrap.takeDamage(30);
-	scavtrap.beRepaired(15);
+	std ::cout << std::endl;
+
+	std::cout << "ClapTrap: " << std::endl;
+	clap.attack("Intruder");
+	clap.takeDamage(30);
+	clap.beRepaired(15);
+
+	std ::cout << std::endl;
+
+	std::cout << "ScavTrap: " << std::endl;
+	scav.attack("Coopy of Intruder");
+	scav.guardGate();
+	scav.takeDamage(20);
+	scav.beRepaired(10);
+
+	std ::cout << std::endl;
 
 	return (0);
 }
