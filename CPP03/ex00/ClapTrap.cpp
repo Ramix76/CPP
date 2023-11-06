@@ -6,26 +6,49 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 09:59:53 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/04 10:33:55 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:48:20 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap() : name("CL4P-TP") , hitPoints(defaultHitPoints), energyPoints(defaultEnergyPoints), attackDamage(defaultAttackDamage)
+{
+	std::cout << "ClapTrap constructor called!" << std::endl;
+}
+
 ClapTrap::ClapTrap(const std::string &name) : name(name), hitPoints(defaultHitPoints), energyPoints(defaultEnergyPoints), attackDamage(defaultAttackDamage)
 {
-	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
+	std::cout << "ClapTrap constructor called!" << std::endl;
+}
+
+ClapTrap::ClapTrap(ClapTrap const &cp) : name(cp.name), hitPoints(cp.hitPoints), energyPoints(cp.energyPoints), attackDamage(cp.attackDamage)
+{
+	std::cout << "Copy ClapTrap constructor called!" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap " << name << " has been destroyed!" << std::endl;
+	std::cout << "ClapTrap destructor called!" << std::endl;
+}
+
+ClapTrap	&ClapTrap::operator=(ClapTrap  const &other)
+{
+	std::cout << "ClapTrap Copy assigment operator called" << std::endl;
+	if (this != &other)
+	{
+		name = other.name;
+		hitPoints = other.hitPoints;
+		energyPoints = other.energyPoints;
+		attackDamage = other.attackDamage;
+	}
+	return (*this);
 }
 
 void	ClapTrap::attack(const std::string &target)
 {
-	if (hitPoints == 0 || energyPoints == 0)
-		std::cout << "ClapTrap " << name << " can't attack " << target << " because of low hit points or energy points!" << std::endl;
+	if (energyPoints == 0)
+		std::cout << "ClapTrap " << name << " can't attack " << target << " because of low energy points!" << std::endl;
 	else
 	{
 		std::cout << "ClapTrap " << name << " attack " << target << ", causing " << attackDamage << " points of damage!" << std::endl;

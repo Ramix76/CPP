@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 09:58:47 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/04 10:07:18 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:48:18 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 class ClapTrap
 {
 	public:
-		ClapTrap(const std::string &target);
+		ClapTrap();
+		ClapTrap(ClapTrap const &cp);
+		ClapTrap(const std::string &name);
+		ClapTrap &operator=(ClapTrap const &other);
 		~ClapTrap();
 		void	attack(const std::string &target);
 		void	takeDamage(unsigned int amount);
