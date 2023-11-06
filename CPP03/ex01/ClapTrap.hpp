@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 09:58:47 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/06 17:08:24 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:51:34 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ class ClapTrap
 		void	beRepaired(unsigned int amount);
 
 	protected:
-		std::string name;
+		std::string _name;
 		unsigned int hitPoints;
 		unsigned int energyPoints;
 		unsigned int attackDamage;
-		ClapTrap();
+		ClapTrap(void);
 
 		static const unsigned int defaultHitPoints  = 10;
 		static const unsigned int defaultEnergyPoints = 10;

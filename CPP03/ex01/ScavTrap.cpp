@@ -6,13 +6,13 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 10:42:59 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/06 17:09:28 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:52:23 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap(void)
 {
 	std::cout << "ScavTrap default constructor called!" << std::endl;
 }
@@ -37,26 +37,27 @@ ScavTrap	&ScavTrap::operator=(ScavTrap const &other)
 	return (*this);
 }
 
-ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
+ScavTrap::ScavTrap(const std::string &name)
 {
-	hitPoints = 100;
-	energyPoints = 50;
-	attackDamage = 20;
+	this->_name = name;
+	this->hitPoints = 100;
+	this->energyPoints = 50;
+	this->attackDamage = 20;
 	std::cout << "ScavTrap constructor called!" << std::endl;
 }
 
 void	ScavTrap::attack(const std::string &target)
 {
 	if (hitPoints == 0 || energyPoints == 0)
-		std::cout << "ScavTrap " << name << " can't attack " << target << " because of low hit points or energy points!" << std::endl;
+		std::cout << "ScavTrap " << _name << " can't attack " << target << " because of low hit points or energy points!" << std::endl;
 	else
 	{
-		std::cout << "ScavTrap " << name << " attacks " << target << " , causing " << attackDamage << " points of damage!" << std::endl;
+		std::cout << "ScavTrap " << _name << " attacks " << target << " , causing " << attackDamage << " points of damage!" << std::endl;
 		energyPoints--;
 	}
 }
 
 void	ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap " << name << " is now in Gatekeeper mode!" << std::endl;
+	std::cout << "ScavTrap " << _name << " is now in Gatekeeper mode!" << std::endl;
 }
