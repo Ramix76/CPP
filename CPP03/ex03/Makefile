@@ -6,19 +6,22 @@
 #    By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/11/07 18:26:35 by framos-p         ###   ########.fr        #
+#    Updated: 2023/11/07 18:33:19 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Fixed
+NAME		=	DiamondTrap
 
 SRCS		=	main.cpp \
-			Fixed.cpp \
+			ClapTrap.cpp \
+			ScavTrap.cpp \
+			FragTrap.cpp \
+			DiamondTrap.cpp \
 
 LINK		=	c++
 CC		=	c++ -c
 DEPFLAGS	=	-MMD -MP
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-shadow
 RM		=	rm -rf
 
 MK		=	Makefile

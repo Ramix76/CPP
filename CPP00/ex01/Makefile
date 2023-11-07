@@ -3,43 +3,56 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+         #
+#    By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/14 12:05:33 by framos-p          #+#    #+#              #
-#    Updated: 2023/10/30 14:11:27 by framos-p         ###   ########.fr        #
+#    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
+#    Updated: 2023/11/07 18:06:55 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	phonebook
 
-SRCS		=	phonebook.cpp \
-			main.cpp \
+SRCS		=	main.cpp \
+			phonebook.cpp \
 			contact.cpp \
 
-OBJS		=	$(SRCS:%.cpp=%.o)
+LINK		=	c++
+CC		=	c++ -c
+DEPFLAGS	=	-MMD -MP
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+RM		=	rm -rf
 
-CC			=	c++
-CFLAGS		=	-g -Wall -Werror -Wextra -std=c++98
-RM			=	rm -rf
+MK		=	Makefile
 
-all: $(NAME)
+OBJS		=	${addprefix ${OBJS_DIR}, ${SRCS:.cpp=.o}}
+DEPS		=	${addprefix ${OBJS_DIR}, ${SRCS:.cpp=.d}}
 
-$(NAME): $(SRCS)
-	@echo "Linking $@"
-	$(CC) $(CFLAGS) -o $@ $^
+OBJS_DIR	=	objs/
+SRCS_DIR	=
 
-%.o: %.cpp
-	@echo "Compiling $<"
-	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp $(MK)
+	@echo "$(BOLD_CYAN)compiling: [$(RED)$<$(BOLD_PURPLE)]"
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDE) $< -o $@
+
+all:
+	@make $(NAME)
+
+$(NAME):: $(OBJS)
+	$(LINK) $(CFLAGS) $(INCLUDE) -o $@ $^
+
+$(NAME)::
+	@echo "\n$(NAME) compiled\n"
 
 clean:
-	@$(RM) $(OBJS)
-	@echo "\n Objects files deleted\n"
+	@$(RM) $(OBJS_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(OBJS)
 	@$(RM) *.dSYM
-	@echo "\nName erased\n"
+	@echo "\nName and objects erased\n"
 
 re: fclean all
 

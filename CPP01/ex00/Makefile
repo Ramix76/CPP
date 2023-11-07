@@ -5,34 +5,55 @@
 #                                                     +:+ +:+         +:+      #
 #    By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/28 11:25:37 by framos-p          #+#    #+#              #
-#    Updated: 2023/10/30 14:12:24 by framos-p         ###   ########.fr        #
+#    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
+#    Updated: 2023/11/07 18:11:49 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Zombie
+NAME		=	zombie
 
-SRCS		=	newZombie.cpp \
-			main.cpp \
+SRCS		=	main.cpp \
 			Zombie.cpp \
-			randomChump.cpp
+			newZombie.cpp \
+			randomChump.cpp \
 
-CC			=	c++
-CFLAGS		=	-g -Wall -Wextra -Werror -std=c++98
-RM			=	rm -rf
+LINK		=	c++
+CC		=	c++ -c
+DEPFLAGS	=	-MMD -MP
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+RM		=	rm -rf
 
-all:		$(NAME)
+MK		=	Makefile
 
-$(NAME):	$(SRCS)
-	@echo "Compiling $@"
-	$(CC) $(CFLAGS) -o $@ $^
+OBJS		=	${addprefix ${OBJS_DIR}, ${SRCS:.cpp=.o}}
+DEPS		=	${addprefix ${OBJS_DIR}, ${SRCS:.cpp=.d}}
+
+OBJS_DIR	=	objs/
+SRCS_DIR	=
+
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp $(MK)
+	@echo "$(BOLD_CYAN)compiling: [$(RED)$<$(BOLD_PURPLE)]"
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDE) $< -o $@
+
+all:
+	@make $(NAME)
+
+$(NAME):: $(OBJS)
+	$(LINK) $(CFLAGS) $(INCLUDE) -o $@ $^
+
+$(NAME)::
+	@echo "\n$(NAME) compiled\n"
 
 clean:
+	@$(RM) $(OBJS_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(OBJS)
 	@$(RM) *.dSYM
-	@echo "\nName erased\n"
+	@echo "\nName and objects erased\n"
 
 re: fclean all
 
