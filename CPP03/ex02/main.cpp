@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 10:26:25 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/04 11:31:47 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:39:47 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,33 @@
 int	main()
 {
 	ClapTrap	claptrap("CT-1");
+	ScavTrap	scavtrap("SP-1");
+	FragTrap	fragtrap("FT-1");
+
+	std::cout << std::endl;
+
+	std::cout << "ClapTrap: " << std::endl;
 	claptrap.attack("Target");
 	claptrap.takeDamage(20);
 	claptrap.beRepaired(10);
 
-	ScavTrap	scavtrap("SP-1");
+	std::cout << std::endl;
 
+	std::cout << "ScavTrap :" << std::endl;
 	scavtrap.attack("Intruder");
 	scavtrap.guardGate();
 	scavtrap.takeDamage(30);
 	scavtrap.beRepaired(15);
 
-	FragTrap	fragtrap("FT-1");
+	std::cout << std::endl;
+
+	std::cout << "FragTrap: " << std::endl;
 	fragtrap.attack("Enemy");
 	fragtrap.highFiveGuys();
 	fragtrap.takeDamage(40);
 	fragtrap.beRepaired(20);
+
+	std::cout << std::endl;
 
 	return (0);
 }
