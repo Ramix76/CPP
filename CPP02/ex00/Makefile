@@ -6,11 +6,11 @@
 #    By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/11/08 10:53:08 by framos-p         ###   ########.fr        #
+#    Updated: 2023/11/08 11:16:21 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Fixedp
+NAME		=	Fixed
 
 SRCS		=	main.cpp \
 			Fixed.cpp \
