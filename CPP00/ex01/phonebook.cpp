@@ -6,12 +6,14 @@
 /*   By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:52:18 by framos-p          #+#    #+#             */
-/*   Updated: 2023/10/26 15:56:17 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:52:53 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
 #include <iomanip>
+#include <iosfwd>
+#include <sstream>
 
 Phonebook::Phonebook()
 {
@@ -137,23 +139,27 @@ void	Phonebook::addContactToPhonebook(Phonebook &phonebook)
 void	Phonebook::searchContacts(const Phonebook &phonebook)
 {
 	phonebook.printContacts();
+
 	if (phonebook.getNumberOfContacts() > 0)
 	{
-		int	index;
-		std::cout << "Enter the index of the contact you want to display: ";
-		std::cin >> index;
-		if (index >= 0 && index < phonebook.getNumberOfContacts())
+		std::string index;
+		bool	validIndex = false;
+		while (!validIndex)
 		{
-			Contact contact = phonebook.getContact(index);
-			std::cout << "Contact Details:" << std::endl;
-			std::cout << "First Name: " << contact.getFirstName() << std::endl;
-			std::cout << "Last Name: " << contact.getLastName() << std::endl;
-			std::cout << "Nickname: " << contact.getNickName() << std::endl;
-			std::cout << "Phone Number: " << contact.getPhoneNumber() << std::endl;
-			std::cout << "Darkest Secret: " << contact.getDarkestSecret() << std::endl;
+			std::cout << std::endl << "Enter the index of the contact you want to display: ";
+			std::getline(std::cin, index);
+			int	indexInt;
+			if (std::stringstream(index) >> indexInt && indexInt >= 0 && indexInt <= 7 && indexInt < phonebook.getNumberOfContacts())
+				validIndex = true;
+			else
+				std::cout << "Invalid index.Try again!!";
 		}
-		else
-			std::cout << "Invalid index. Please enter a valid index." << std::endl;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		Contact contact = phonebook.getContact(atoi(index.c_str()));
+		std::cout << std::endl << std::endl << "Contact Details:" << std::endl;
+		std::cout << "First Name: " << contact.getFirstName() << std::endl;
+		std::cout << "Last Name: " << contact.getLastName() << std::endl;
+		std::cout << "Nickname: " << contact.getNickName() << std::endl;
+		std::cout << "Phone Number: " << contact.getPhoneNumber() << std::endl;
+		std::cout << "Darkest Secret: " << contact.getDarkestSecret() << std::endl;
 	}
 }

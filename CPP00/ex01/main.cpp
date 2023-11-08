@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:33:52 by framos-p          #+#    #+#             */
-/*   Updated: 2023/10/26 15:56:19 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:52:55 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main()
 	{
 		if (std::cin.eof())
 			break;
-		std::cout << "Options: ADD, SEARCH, EXIT" << std::endl;
+		std::cout << std::endl << "Options: ADD, SEARCH, EXIT" << std::endl;
 		std::string choice;
 		std::getline(std::cin, choice);
 		if (std::cin.eof())
