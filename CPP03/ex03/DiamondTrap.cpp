@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
+/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:46:40 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/07 19:54:40 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:45:01 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ DiamondTrap::DiamondTrap(DiamondTrap const &dp)
 	*this=dp;
 }
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + " _clap_name")
+DiamondTrap::DiamondTrap(std::string name) 
 {
 	std::cout << "DiamondTrap constructor called!" << std::endl;
-	_name = name;
-	hitPoints = 100;
-	energyPoints = 50;
-	attackDamage = 30;
+	ClapTrap::_name = name + "_clap_name";
+	this->hitPoints = 100;
+	this->energyPoints = 50;
+	this->attackDamage = 30;
 }
 
 DiamondTrap::~DiamondTrap()
@@ -40,11 +40,13 @@ DiamondTrap::~DiamondTrap()
 
 DiamondTrap &DiamondTrap::operator=(DiamondTrap const &other)
 {
-	_name = other._name;
-	ClapTrap::_name = other._name + "_clap_name";
-	hitPoints = other.hitPoints;
-	energyPoints = other.energyPoints;
-	attackDamage = other.attackDamage;
+	this->_name = other._name;
+	this->ClapTrap::_name = other._name + "_clap_name";
+	this->hitPoints = other.hitPoints;
+	this->energyPoints = other.energyPoints;
+	this->attackDamage = other.attackDamage;
+
+	return (*this);
 }
 
 void	DiamondTrap::attack(std::string const &target)

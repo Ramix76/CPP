@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
+/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 10:40:14 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/07 19:20:26 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:35:34 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	public:
-		//ScavTrap();
 		ScavTrap(ScavTrap const &sct);
 		ScavTrap(const std::string &name);
 		ScavTrap &operator=(ScavTrap const &other);
