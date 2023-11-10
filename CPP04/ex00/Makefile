@@ -6,13 +6,18 @@
 #    By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/11/08 11:22:36 by framos-p         ###   ########.fr        #
+#    Updated: 2023/11/10 18:56:03 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Polymorphism
 
 SRCS		=	main.cpp \
+			Dog.cpp \
+			Cat.cpp \
+			Animal.cpp \
+			WrongAnimal.cpp \
+			WrongCat.cpp \
 
 LINK		=	c++
 CC		=	c++ -c
