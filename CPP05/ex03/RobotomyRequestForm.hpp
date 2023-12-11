@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:32:55 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 18:01:30 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:39:29 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,19 @@
 
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
-# include <fstream>
-# include <cstdlib>
-# include <ctime>
 
 class RobotomyRequestForm : public AForm
 {
-	public:
-		RobotomyRequestForm();
-		~RobotomyRequestForm();
-		RobotomyRequestForm(RobotomyRequestForm const &rrf);
-		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
+	RobotomyRequestForm();
+	~RobotomyRequestForm();
+	RobotomyRequestForm(RobotomyRequestForm const &rrf);
+	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
 
-		std::string	const &getTarget() const;
-		void		execute(Bureaucrat &executor) const;
-
-	private:
-		const std::string _target;
+	std::string	const &getTarget() const;
+	void		execute(Bureaucrat &executor) const;
 };
 
-std::ostream &operator<<(std::ostream &out, RobotomyRequestForm const &form);
+std::ostream::&operator<<(std::ostream &out, RobotomyRequestForm const &form);
 
 #endif

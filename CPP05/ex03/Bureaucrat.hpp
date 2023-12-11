@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:55:21 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 18:06:18 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:22:47 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BUREAUCRAT_HPP
 
 # include <stdexcept>
-# include "AForm.hpp"
+# include "Form.hpp"
 # include <iostream>
 
 class AForm;
@@ -50,9 +50,9 @@ class Bureaucrat
 		void	decrementGrade();
 		int	getGrade() const;
 		const std::string &getName() const;
+
+		friend std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
+
 };
-
-std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
-
 
 #endif

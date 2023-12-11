@@ -6,13 +6,11 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:28:01 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 18:24:26 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:43:38 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat()
 {
@@ -85,7 +83,7 @@ void	Bureaucrat::decrementGrade()
 		throw GradeTooLowException();
 }
 
-void	Bureaucrat::signForm(AForm &form)
+void	Bureaucrat::signForm(Form &form)
 {
 	try
 	{
@@ -97,24 +95,6 @@ void	Bureaucrat::signForm(AForm &form)
 		std::cout << this->_name << " cannot sign " << form.getName() << " becaus " << e.what() << std::endl;
 
 	}
-}
-
-void	Bureaucrat::executeForm(AForm const &form)
-{
-	try
-	{
-		form.execute(*this);
-		std::cout << this->_name << " executed " << form.getName() << std::endl;
-	}
-	catch (ShrubberyCreationForm::FormNotSignedException &e)
-	{
-		std::cout << this->_name << " couldn't execute " << form.getName() << " because form is not signed" << std::endl;
-	}
-	catch (AForm::GradeTooLowException &e)
-	{
-		std::cout << this->_name << " couldn't execute " << form.getName() << "because bureaucrat has not enough clearance" << std::endl;
-	}
-	return ;
 }
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)

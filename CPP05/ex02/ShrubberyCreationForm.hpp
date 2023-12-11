@@ -6,15 +6,16 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:44:20 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/20 13:50:02 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:00:32 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 # define SHRUBBERYCREATIONFORM_HPP
 
-# include "AFomr.hpp"
+# include "AForm.hpp"
 # include "Bureaucrat.hpp"
+# include <fstream>
 
 class ShrubberyCreationForm : public AForm
 {

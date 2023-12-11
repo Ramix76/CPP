@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 13:32:55 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 18:01:30 by framos-p         ###   ########.fr       */
+/*   Created: 2023/11/20 13:44:20 by framos-p          #+#    #+#             */
+/*   Updated: 2023/11/20 13:50:02 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
+# include "AFomr.hpp"
 # include "Bureaucrat.hpp"
-# include "AForm.hpp"
-# include <fstream>
-# include <cstdlib>
-# include <ctime>
 
-class RobotomyRequestForm : public AForm
+class ShrubberyCreationForm : public AForm
 {
+	private:
+		const std::string _target;
+
 	public:
-		RobotomyRequestForm();
-		~RobotomyRequestForm();
-		RobotomyRequestForm(RobotomyRequestForm const &rrf);
-		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
+		ShrubberyCreationForm();
+		~ShrubberyCreationForm();
+		ShrubberyCreationForm(ShrubberyCreationForm const &scf);
+		ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm &operator=(ShrubberyCreationForm const &other);
 
 		std::string	const &getTarget() const;
 		void		execute(Bureaucrat &executor) const;
-
-	private:
-		const std::string _target;
 };
 
-std::ostream &operator<<(std::ostream &out, RobotomyRequestForm const &form);
+std::ostream &operator<<(std::ostream &out, ShrubberyCreationForm const &form);
 
 #endif

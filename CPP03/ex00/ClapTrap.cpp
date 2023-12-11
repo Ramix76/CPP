@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 09:59:53 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/06 12:48:20 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/12/11 12:05:57 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ ClapTrap	&ClapTrap::operator=(ClapTrap  const &other)
 
 void	ClapTrap::attack(const std::string &target)
 {
-	if (energyPoints == 0)
-		std::cout << "ClapTrap " << name << " can't attack " << target << " because of low energy points!" << std::endl;
+	if (energyPoints == 0 || hitPoints == 0) 
+		std::cout << "ClapTrap " << name << " can't attack " << target << " because of low energy points or its destroyed!" << std::endl;
 	else
 	{
 		std::cout << "ClapTrap " << name << " attack " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
@@ -71,8 +71,8 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (hitPoints == 0)
-		std::cout << "ClapTrap " << name << " can't be repaired because it is destroyed!" << std::endl;
+	if (hitPoints == 0 || energyPoints == 0)
+		std::cout << "ClapTrap " << name << " can't be repaired because it is destroyed or doesn't have enough energy!" << std::endl;
 	else
 	{
 		hitPoints += amount;

@@ -6,7 +6,7 @@
 #    By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/11/27 17:51:15 by framos-p         ###   ########.fr        #
+#    Updated: 2023/11/20 12:56:05 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,7 @@ NAME		=	Form
 
 SRCS		=	main.cpp \
 			Bureaucrat.cpp \
-			AForm.cpp \
-			PresidentialPardonForm.cpp \
-			RobotomyRequestForm.cpp \
-			ShrubberyCreationForm.cpp \
+			Form.cpp \
 
 LINK		=	c++
 CC		=	c++ -c
