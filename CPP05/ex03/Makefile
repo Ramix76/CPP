@@ -6,15 +6,19 @@
 #    By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 12:20:47 by framos-p          #+#    #+#              #
-#    Updated: 2023/11/20 12:56:05 by framos-p         ###   ########.fr        #
+#    Updated: 2023/12/21 11:21:54 by framos-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Form
+NAME		=	Intern
 
 SRCS		=	main.cpp \
 			Bureaucrat.cpp \
-			Form.cpp \
+			AForm.cpp \
+			PresidentialPardonForm.cpp \
+			RobotomyRequestForm.cpp \
+			ShrubberyCreationForm.cpp \
+			Intern.cpp \
 
 LINK		=	c++
 CC		=	c++ -c

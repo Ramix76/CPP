@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
+/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:32:55 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/20 13:39:29 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:29:38 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,27 @@
 
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
+# include <fstream>
+# include <cstdlib>
+# include <ctime>
 
 class RobotomyRequestForm : public AForm
 {
-	RobotomyRequestForm();
-	~RobotomyRequestForm();
-	RobotomyRequestForm(RobotomyRequestForm const &rrf);
-	RobotomyRequestForm(std::string target);
-	RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
+	public:
+		~RobotomyRequestForm();
+		RobotomyRequestForm(RobotomyRequestForm const &rrf);
+		RobotomyRequestForm(std::string target);
+		RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
 
-	std::string	const &getTarget() const;
-	void		execute(Bureaucrat &executor) const;
+		std::string	const &getTarget() const;
+		void		execute(Bureaucrat &executor) const;
+		AForm 		*clone( void ) const;
+
+	private:
+		const std::string _target;
+		RobotomyRequestForm();
 };
 
-std::ostream::&operator<<(std::ostream &out, RobotomyRequestForm const &form);
+std::ostream &operator<<(std::ostream &out, RobotomyRequestForm const &form);
 
 #endif
