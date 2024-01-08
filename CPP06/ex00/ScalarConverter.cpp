@@ -6,11 +6,13 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2023/12/21 15:13:15 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:37:09 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include <iomanip>
+#include <cmath>
 
 
 ScalarConverter::ScalarConverter()
@@ -41,48 +43,40 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other)
 
 void    ScalarConverter::convert(const std::string &input)
 {
-    std::istringstream ss(input);
-    
-    char c;
-    ss >> c;
-    std::cout << "Char: " << c << std::endl;
-
-    int i;
-    ss.clear();
-    ss.seekg(0);
-    ss >> i;
-    if (!ss.fail()) {
-        std::cout << "Int: " << i << std::endl;
-    } else {
-        std::cout << "Invalid int input" << std::endl;
-    }
-
-    float f;
-    ss.clear();
-    ss.seekg(0);
-    ss >> f;
-    if (!ss.fail()) {
-        std::cout << "Float: " << f << std::endl;
-    } else {
-        std::cout << "Invalid float input" << std::endl;
-    }
-
-    double d;
-    ss.clear();
-    ss.seekg(0);
-    ss >> d;
-    if (!ss.fail()) {
-        std::cout << "Double: " << d << std::endl;
-    } else {
-        std::cout << "Invalid double input" << std::endl;
-    }
-
     if (input == "inf" || input == "-inf" || input == "+inf") {
-        std::cout << "Special Float: " << (input == "-inf" ? -std::numeric_limits<float>::infinity()
-                                                            : std::numeric_limits<float>::infinity()) << std::endl;
+        std::cout << "Char: impossible" << std::endl;
+        std::cout << "Int: impossible" << std::endl;
+        std::cout << "Float: " << (input == "-inf" ? -std::numeric_limits<float>::infinity()
+                                                  : std::numeric_limits<float>::infinity()) << "f" << std::endl;
+        std::cout << "Double: " << (input == "-inf" ? -std::numeric_limits<double>::infinity()
+                                                   : std::numeric_limits<double>::infinity()) << std::endl;
+        return;
     }
 
     if (input == "nan") {
-        std::cout << "Special Double: " << std::numeric_limits<double>::quiet_NaN() << std::endl;
+        std::cout << "Char: impossible" << std::endl;
+        std::cout << "Int: impossible" << std::endl;
+        std::cout << "Float: nan" << std::endl;
+        std::cout << "Double: nan" << std::endl;
+        return;
     }
+    
+    std::istringstream ss(input);
+    
+    double value;
+    ss >> value;
+
+    if (!ss.fail())
+    {
+        char c = static_cast<char>(value); // Convertir a char
+        std::cout << "Char: " << c << std::endl;
+        std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        std::cout << std::fixed << std::setprecision(1); // Mostrar un decimal
+        std::cout << "Float: " << static_cast<float>(value) << "f" << std::endl;
+        std::cout << "Double: " << std::setprecision(1) << std::fixed << value << std::endl;
+        
+    }
+    else
+        std::cout << "Invalid input" << std::endl;
+           
 }
