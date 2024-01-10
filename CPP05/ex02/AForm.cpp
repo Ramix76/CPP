@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-pn@student.42barcelona.c  +#+  +:+       +#+        */
+/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:59:23 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 17:51:50 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:40:36 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ const char *AForm::GradeTooHighException::what() const throw()
 const char *AForm::GradeTooLowException::what() const throw()
 {
 	return ("Grade too low");
+}
+
+const char *AForm::FormNotSignedException::what() const throw()
+{
+    return ("Form is not signed!");
 }
 
 std::ostream &operator<<(std::ostream &out, const AForm &form)

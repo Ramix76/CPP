@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+        */
+/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:32:23 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 18:08:05 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:42:48 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat &executor) const
 	return ;
 }
 
-std::ostream &operator<(std::ostream &out, ShrubberyCreationForm const &form)
+std::ostream &operator<<(std::ostream &out, ShrubberyCreationForm const &form)
 {
 	out << "Name: " << form.getName() << std::endl
 	<< "Signed Status: " << form.getIsSigned() << std::endl

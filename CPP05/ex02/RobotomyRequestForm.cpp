@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-p@student.42barcel>       +#+  +:+       +#+        */
+/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:01:20 by framos-p          #+#    #+#             */
-/*   Updated: 2023/11/27 18:08:42 by framos-p         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:43:08 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	RobotomyRequestForm::execute(Bureaucrat &executor) const
 	return ;
 }
 
-std::ostream &operator<(std::ostream &out, RobotomyRequestForm const &form)
+std::ostream &operator<<(std::ostream &out, RobotomyRequestForm const &form)
 {
 	out << "Name: " << form.getName() << std::endl
 	<< "Signed Status: " << form.getIsSigned() << std::endl

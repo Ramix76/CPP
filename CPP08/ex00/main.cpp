@@ -6,12 +6,10 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:54:14 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/09 15:01:14 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/10 10:40:05 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <vector>
 #include "easyfind.hpp"
 
 int main()

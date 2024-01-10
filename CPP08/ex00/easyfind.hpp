@@ -6,12 +6,15 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:43:34 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/09 14:54:44 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/10 10:40:12 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
+
+#include <iostream>
+#include <vector>
 
 struct ValueFoundException : public std::exception
 {
