@@ -6,14 +6,11 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/08 11:37:09 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:26:20 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <iomanip>
-#include <cmath>
-
 
 ScalarConverter::ScalarConverter()
 {
@@ -43,17 +40,17 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other)
 
 void    ScalarConverter::convert(const std::string &input)
 {
-    if (input == "inf" || input == "-inf" || input == "+inf") {
+    if (input == "inf" || input == "-inf" || input == "+inf")
+    {
         std::cout << "Char: impossible" << std::endl;
         std::cout << "Int: impossible" << std::endl;
-        std::cout << "Float: " << (input == "-inf" ? -std::numeric_limits<float>::infinity()
-                                                  : std::numeric_limits<float>::infinity()) << "f" << std::endl;
-        std::cout << "Double: " << (input == "-inf" ? -std::numeric_limits<double>::infinity()
-                                                   : std::numeric_limits<double>::infinity()) << std::endl;
+        std::cout << "Float: " << (input == "-inf" ? "-inf" : "inf") << "f" << std::endl;
+        std::cout << "Double: " << (input == "-inf" ? "-inf" : "inf") << std::endl;
         return;
     }
 
-    if (input == "nan") {
+    if (input == "nan")
+    {
         std::cout << "Char: impossible" << std::endl;
         std::cout << "Int: impossible" << std::endl;
         std::cout << "Float: nan" << std::endl;
