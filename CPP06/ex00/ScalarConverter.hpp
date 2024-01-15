@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:16 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 12:51:12 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:26:14 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ class ScalarConverter
         ~ScalarConverter();
         ScalarConverter(ScalarConverter const &sc);
         ScalarConverter &operator=(ScalarConverter const &other);
-        bool isValidFormat(const std::string &str);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 12:58:08 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:08:28 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,24 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other)
     return (*this);    
 }
 
-bool ScalarConverter::isValidFormat(const std::string &str)
-{
-    size_t dotPos = str.find('.');
-    size_t fPos = str.find('f');
-
-    if (dotPos == std::string::npos || fPos == std::string::npos || fPos != str.length() - 1)
-        return false;
-
-    for (size_t i = 0; i < dotPos; ++i)
-    {
-        if (!std::isdigit(str[i]) && str[i] != '-')
-            return false;
-    }
-
-    for (size_t i = dotPos + 1; i < fPos; ++i)
-    {
-        if (!std::isdigit(str[i]))
-            return false;
-    }
-
-    return true;
+bool hasDotWithoutDecimal(const std::string& input) {
+    size_t dotPos = input.find('.');
+    return (dotPos != std::string::npos && dotPos == input.size() - 1);
 }
 
 void    ScalarConverter::convert(const std::string &input)
 {
-    ScalarConverter converter;
-    if (!converter.isValidFormat(input))
-    {
-        std::cout << "Invalid input format. Please use the format X.Yf" << std::endl;
+    // Verificar si el número tiene un punto pero sin un decimal
+    if (hasDotWithoutDecimal(input)) {
+        std::cout << "Invalid input: Missing decimal part after dot." << std::endl;
         return;
+    }
+    
+    // Eliminar 'f' al final del número
+    std::string modifiedInput = input;
+    size_t dotPos = modifiedInput.find('.');
+    if (dotPos != std::string::npos && dotPos < modifiedInput.size() - 1 && isdigit(modifiedInput[dotPos + 1])) {
+        modifiedInput.pop_back();  // Eliminar 'f'
     }
     
     if (input == "inf" || input == "-inf" || input == "+inf")
@@ -88,11 +76,11 @@ void    ScalarConverter::convert(const std::string &input)
         return;
     }
     
-    std::istringstream ss(input);
+    std::istringstream ss(modifiedInput);
     
     double value;
     ss >> value;
-
+    
     if (!ss.fail())
     {
         // Verificar si el valor está dentro del rango de int
