@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 16:10:42 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:12:36 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other)
     return (*this);    
 }
 
-bool hasDotWithoutDecimal(const std::string& input) {
+bool hasDotWithoutDecimal(const std::string& input)
+{
     size_t dotPos = input.find('.');
     return (dotPos != std::string::npos && dotPos == input.size() - 1);
 }
@@ -54,8 +55,10 @@ void    ScalarConverter::convert(const std::string &input)
     // Eliminar 'f' al final del número si está seguido por un '.' pero no por un número
     std::string modifiedInput = input;
     size_t dotPos = modifiedInput.find('.');
-    if (dotPos != std::string::npos && dotPos < modifiedInput.size() - 1) {
-        if (modifiedInput[dotPos + 1] == 'f') {
+    if (dotPos != std::string::npos && dotPos < modifiedInput.size() - 1)
+    {
+        if (modifiedInput[dotPos + 1] == 'f')
+        {
             std::cout << "Invalid input: 'f' should be preceded by a number after the dot." << std::endl;
             return;
         }
