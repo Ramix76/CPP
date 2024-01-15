@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 11:10:17 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:58:08 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,38 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other)
     return (*this);    
 }
 
+bool ScalarConverter::isValidFormat(const std::string &str)
+{
+    size_t dotPos = str.find('.');
+    size_t fPos = str.find('f');
+
+    if (dotPos == std::string::npos || fPos == std::string::npos || fPos != str.length() - 1)
+        return false;
+
+    for (size_t i = 0; i < dotPos; ++i)
+    {
+        if (!std::isdigit(str[i]) && str[i] != '-')
+            return false;
+    }
+
+    for (size_t i = dotPos + 1; i < fPos; ++i)
+    {
+        if (!std::isdigit(str[i]))
+            return false;
+    }
+
+    return true;
+}
+
 void    ScalarConverter::convert(const std::string &input)
 {
+    ScalarConverter converter;
+    if (!converter.isValidFormat(input))
+    {
+        std::cout << "Invalid input format. Please use the format X.Yf" << std::endl;
+        return;
+    }
+    
     if (input == "inf" || input == "-inf" || input == "+inf")
     {
         std::cout << "Char: impossible" << std::endl;
