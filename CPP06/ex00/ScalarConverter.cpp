@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 15:44:08 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:46:07 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void    ScalarConverter::convert(const std::string &input)
     
     std::istringstream ss(modifiedInput);
     
-    double value;
+    long double value;
     ss >> value;
     
     if (!ss.fail())
@@ -90,7 +90,7 @@ void    ScalarConverter::convert(const std::string &input)
             std::cout << "Int: " << static_cast<int>(value) << std::endl;
         }
         
-        else if (value > static_cast<double>(std::numeric_limits<int>::max()) || value < static_cast<double>(std::numeric_limits<int>::min()))
+        else if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
         {
             std::cout << "Char: impossible" << std::endl;
             std::cout << "Int: impossible" << std::endl;
