@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/11 11:26:20 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:10:17 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,48 @@ void    ScalarConverter::convert(const std::string &input)
 
     if (!ss.fail())
     {
-        char c = static_cast<char>(value); // Convertir a char
-        std::cout << "Char: " << c << std::endl;
-        std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        // Verificar si el valor está dentro del rango de int
+        if (value >= 0 && value <= 31)
+        {
+            std::cout << "Char: non displayable" << std::endl;
+            std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        }
+        else if (value == 127)
+        {
+            std::cout << "Char: non displayable" << std::endl;
+            std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        }
+        else if (value > static_cast<double>(std::numeric_limits<int>::max()) || value < static_cast<double>(std::numeric_limits<int>::min()))
+        {
+            std::cout << "Char: impossible" << std::endl;
+            std::cout << "Int: impossible" << std::endl;
+        }
+        else if (value < 0 && value > -129) 
+        {
+            std::cout << "Char: non displayable" << std::endl;
+            std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        }
+        else if (value < -128)
+        {
+            std::cout << "Char: impossible" << std::endl;
+            std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        }
+        else if (value > 127)
+        {
+            std::cout << "Char: impossible" << std::endl;
+            std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        }
+        else
+        {
+            char c = static_cast<char>(value); // Convertir a char
+            std::cout << "Char: " << c << std::endl;
+            std::cout << "Int: " << static_cast<int>(value) << std::endl;
+        }
+
         std::cout << std::fixed << std::setprecision(1); // Mostrar un decimal
         std::cout << "Float: " << static_cast<float>(value) << "f" << std::endl;
         std::cout << "Double: " << std::setprecision(1) << std::fixed << value << std::endl;
-        
     }
     else
         std::cout << "Invalid input" << std::endl;
-           
 }
