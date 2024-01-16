@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 16:12:36 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:13:29 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,46 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other)
     return (*this);    
 }
 
-bool hasDotWithoutDecimal(const std::string& input)
+bool ScalarConverter::isCharRepresentable(char c)
+{
+    // Puedes ajustar las condiciones según tus necesidades
+    return (std::isalnum(c) || std::ispunct(c) || std::isspace(c));
+}
+
+void ScalarConverter::printCharInfo(char c)
+{
+    if (isCharRepresentable(c))
+    {
+        int asciiValue = static_cast<int>(c);
+
+        // Muestra la información para el char
+        std::cout << "Char: " << c << std::endl;
+
+        // Muestra la información para el int
+        printAsciiInfo(asciiValue);
+
+        // Muestra la información para el float
+        std::cout << "Float: " << static_cast<float>(asciiValue) << "f" << std::endl;
+
+        // Muestra la información para el double
+        std::cout << "Double: " << std::setprecision(1) << std::fixed << asciiValue << std::endl;
+    }
+    else
+    {
+        std::cout << "Char: non displayable" << std::endl;
+        std::cout << "Int: impossible" << std::endl;
+        std::cout << "Float: impossible" << std::endl;
+        std::cout << "Double: impossible" << std::endl;
+    }
+}
+
+void ScalarConverter::printAsciiInfo(int asciiValue)
+{
+    // Muestra la información para el int
+    std::cout << "Int: " << asciiValue << std::endl;
+}
+
+bool ScalarConverter::hasDotWithoutDecimal(const std::string& input)
 {
     size_t dotPos = input.find('.');
     return (dotPos != std::string::npos && dotPos == input.size() - 1);
@@ -46,6 +85,13 @@ bool hasDotWithoutDecimal(const std::string& input)
 
 void    ScalarConverter::convert(const std::string &input)
 {
+    if (input.length() == 1)
+    {
+        char c = input[0];
+        printCharInfo(c);
+        return;
+    }
+    
     // Verificar si el número tiene un punto pero sin un decimal
     if (hasDotWithoutDecimal(input))
     {
