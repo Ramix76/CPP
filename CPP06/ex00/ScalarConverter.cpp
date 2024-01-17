@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:24 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/17 15:10:15 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:05:42 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,33 @@ void ScalarConverter::convert(const std::string &input)
     }
     try
     {
+        // Check if input is a float (ends with 'f')
+        if (input.size() > 1 && input.back() == 'f' && input[input.size() - 2] == '.')
+        {
+            std::string modifiedInput = input.substr(0, input.length() - 1); // Remove 'f'
+
+            long double doubleValue = std::stold(modifiedInput);
+
+            // Handle the casting to char for float values
+            std::cout << "Char: ";
+            if (std::isprint(static_cast<int>(doubleValue)))
+            {
+                char c = static_cast<char>(doubleValue);
+                std::cout << c << std::endl;
+            }
+            else
+            {
+                std::cout << "non displayable" << std::endl;
+            }
+
+            std::cout << "Int: impossible" << std::endl;
+            std::cout << "Float: " << std::fixed << std::setprecision(1) << static_cast<float>(doubleValue) << "f" << std::endl;
+            std::cout << "Double: " << std::fixed << std::setprecision(1) << doubleValue << std::endl;
+
+            return;
+        }
         size_t endPos;
-        long longValue = std::stoi(input, &endPos);
+        long double longValue = std::stold(input, &endPos);
 
         if (endPos == input.size())
         {
@@ -161,7 +186,7 @@ void ScalarConverter::convert(const std::string &input)
             size_t dotPos = input.find('.');
             if (dotPos != std::string::npos && dotPos < input.size() - 1 && isdigit(input[dotPos + 1]))
             {
-                double doubleValue = std::stod(input);
+                long double doubleValue = std::stold(input);
 
                 // Handle the casting to char for float values
                 std::cout << "Char: ";
@@ -189,10 +214,10 @@ void ScalarConverter::convert(const std::string &input)
     {
         std::cout << "Invalid input" << std::endl;
     }
-    catch (std::out_of_range)
-    {
-        std::cout << "Out of range" << std::endl;
-    }
+    // catch (std::out_of_range)
+    // {
+    //     std::cout << "Out of range" << std::endl;
+    // }
 }
 
 // void    ScalarConverter::convert(const std::string &input)

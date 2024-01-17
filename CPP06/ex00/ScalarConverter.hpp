@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:16 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/16 12:13:55 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:46:04 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <iomanip>
 # include <cmath>
 # include <cfloat>
+# include <cctype>
+# include <cstdlib>
 
 class ScalarConverter
 {
