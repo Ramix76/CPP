@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:34:16 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/17 15:46:04 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:59:49 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ class ScalarConverter
         static bool isCharRepresentable(char c);
         static void printCharInfo(char c);
         static void printAsciiInfo(int asciiValue);
-        static bool hasDotWithoutDecimal(const std::string& input);
 };
 
 #endif
