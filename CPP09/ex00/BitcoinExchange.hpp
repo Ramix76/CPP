@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:35:05 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 10:15:55 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:14:31 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 class BitcoinExchange
 {
     private:
-        std::map<std::string, double> exchangeRates;
+        std::map<std::string, float> exchangeRates;
         
     public:
         BitcoinExchange();

@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:35:40 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 10:26:30 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:09:37 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ int main(int argc, char *argv[]) {
         std::cerr << "Error: Missing input file argument." << std::endl;
         return 1;
     }
+
+    // Create an instance of BitcoinExchange
+    BitcoinExchange exchange;
 
     std::ifstream inputFile(argv[1]);
     if (!inputFile.is_open()) {
@@ -42,6 +45,7 @@ int main(int argc, char *argv[]) {
         }
 
         try {
+            // Use the exchange instance to get the exchange rate
             float exchangeRate = exchange.getExchangeRate(date, exchangeRates);
             std::cout << date << " => " << value << " = " << (value * exchangeRate) << std::endl;
         } catch (std::exception& e) {

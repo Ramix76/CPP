@@ -6,7 +6,7 @@
 /*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:35:12 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/15 10:24:19 by framos-p         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:13:40 by framos-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::BitcoinExchange(const std::string &csvFileName)
 {
-    //std::cout << "BitcoinExchange constructor called!" << std::endl;
     try
     {
-        loadExchangeRates(csvFileName);
+        // Pass the second argument, which is a reference to exchangeRates
+        loadExchangeRates(csvFileName, exchangeRates);
     }
     catch (const BitcoinException &e)
     {
