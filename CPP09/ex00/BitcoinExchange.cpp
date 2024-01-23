@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 11:35:12 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/18 14:13:40 by framos-p         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange()
@@ -18,19 +6,19 @@ BitcoinExchange::BitcoinExchange()
     return ;
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &csvFileName)
-{
-    try
-    {
-        // Pass the second argument, which is a reference to exchangeRates
-        loadExchangeRates(csvFileName, exchangeRates);
-    }
-    catch (const BitcoinException &e)
-    {
-        // Propagate the exception with a more informative message
-        throw BitcoinException("Error opening exchange rate file: " + std::string(e.what()));
-    }
-}
+// BitcoinExchange::BitcoinExchange(const std::string &csvFileName)
+// {
+//     // try
+//     // {
+//     //     // Pass the second argument, which is a reference to exchangeRates
+//     //     loadExchangeRates(csvFileName, exchangeRates);
+//     // }
+//     // catch (const BitcoinException &e)
+//     // {
+//     //     // Propagate the exception with a more informative message
+//     //     throw BitcoinException("Error opening exchange rate file: " + std::string(e.what()));
+//     // }
+// }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &btc)
 {
@@ -51,38 +39,38 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
     return (*this);
 }
 
-bool BitcoinExchange::loadExchangeRates(const std::string& filename, std::map<std::string, float>& exchangeRates) {
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        return false;
+// Implementación del método compareDates
+void BitcoinExchange::compareDates(const std::string &inputFileName)
+{
+    std::ifstream inputFile(inputFileName);
+    std::string line;
+
+    if (!inputFile.is_open())
+    {
+        throw BitcoinException("Error opening input file");
     }
 
-    std::string line;
-    while (std::getline(file, line)) {
+    while (std::getline(inputFile, line))
+    {
         std::istringstream iss(line);
-        std::string date;
-        float rate;
+        std::string date, value;
 
-        if (iss >> date >> rate) {
-            exchangeRates[date] = rate;
+        // Leer fecha y valor desde el archivo input.txt
+        if (!(iss >> date >> value))
+        {
+            throw BitcoinException("Invalid format in input file");
+        }
+
+        // Comprobar si la fecha existe en el mapa de tasas de cambio
+        if (exchangeRates.find(date) != exchangeRates.end())
+        {
+            std::cout << "Fecha encontrada: " << date << " Valor: " << exchangeRates[date] << std::endl;
+        }
+        else
+        {
+            std::cout << "Fecha no encontrada: " << date << std::endl;
         }
     }
 
-    return true;
-}
-
-float BitcoinExchange::getExchangeRate(const std::string& date, const std::map<std::string, float>& exchangeRates) {
-    std::map<std::string, float>::const_iterator it = exchangeRates.lower_bound(date);
-
-    if (it == exchangeRates.begin() && it->first > date) {
-        throw std::runtime_error("Date not found in the database.");
-    }
-
-    if (it == exchangeRates.end()) {
-        --it; // Use the closest lower date
-    } else if (it->first != date && it != exchangeRates.begin()) {
-        --it; // Use the closest lower date
-    }
-
-    return it->second;
+    inputFile.close();
 }

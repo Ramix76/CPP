@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: framos-p <framos-p@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 11:35:05 by framos-p          #+#    #+#             */
-/*   Updated: 2024/01/18 14:14:31 by framos-p         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef BITCOINEXCHANGE_HPP
 # define BITCOINEXCHANGE_HPP
 
@@ -29,7 +17,7 @@ class BitcoinExchange
         
     public:
         BitcoinExchange();
-        BitcoinExchange(const std::string &csvFileName);
+        // BitcoinExchange(const std::string &csvFileName);
         BitcoinExchange(BitcoinExchange const &btc);
         ~BitcoinExchange();
         BitcoinExchange &operator=(const BitcoinExchange &other);
@@ -48,8 +36,7 @@ class BitcoinExchange
                 virtual ~BitcoinException() throw() {}
         };
 
-        bool loadExchangeRates(const std::string& filename, std::map<std::string, float>& exchangeRates);
-        float getExchangeRate(const std::string& date, const std::map<std::string, float>& exchangeRates);          
+        void compareDates(const std::string &inputFileName);
 };
 
 #endif
