@@ -13,26 +13,19 @@ int compararFechas(const Fecha& fecha1, const Fecha& fecha2) {
 }
 
 // Función para buscar coincidencia exacta
-bool buscarCoincidenciaExacta(const std::vector<Fecha>& fechasData, const Fecha& fechaInput) {
-    for (size_t j = 0; j < fechasData.size(); ++j) {
-        if (compararFechas(fechaInput, fechasData[j]) == 0) {
-            return true;
-        }
-    }
-    return false;
+bool buscarCoincidenciaExacta(const std::map<Fecha, bool>& fechasData, const Fecha& fechaInput) {
+    return fechasData.find(fechaInput) != fechasData.end();
 }
 
 // Función para buscar la fecha más cercana
-int buscarFechaCercana(const std::vector<Fecha>& fechasData, const Fecha& fechaInput) {
-    int mejorCoincidencia = 0;
-    for (size_t j = 1; j < fechasData.size(); ++j) {
-        // Verificar si la fecha actual es más cercana y anterior a la fecha de entrada
-        if (compararFechas(fechasData[j], fechaInput) < 0 &&
-            compararFechas(fechasData[j], fechaInput) > compararFechas(fechasData[mejorCoincidencia], fechaInput)) {
-            mejorCoincidencia = j;
-        }
+Fecha buscarFechaCercana(const std::map<Fecha, bool>& fechasData, const Fecha& fechaInput) {
+    std::map<Fecha, bool>::const_iterator it = fechasData.lower_bound(fechaInput);
+
+    if (it != fechasData.begin()) {
+        --it;
     }
-    return mejorCoincidencia;
+
+    return it->first;
 }
 
 // Función principal para procesar el archivo de entrada
@@ -44,25 +37,26 @@ void procesarArchivos(const char* inputFileName) {
         return;
     }
 
+    std::map<Fecha, bool> fechasData;
+
+    // Leer fechas de data.csv y almacenar en el mapa
+    std::ifstream archivo1("data.csv");
+    if (!archivo1.is_open()) {
+        std::cerr << "Error al abrir el archivo data.csv" << std::endl;
+        return;
+    }
+
+    std::string linea1;
+    while (getline(archivo1, linea1)) {
+        Fecha fecha;
+        extraerFecha(linea1, fecha);
+        fechasData[fecha] = true;
+    }
+    archivo1.close();
+
     std::string linea2;
 
     while (getline(archivo2, linea2)) {
-        std::vector<Fecha> fechasData; // Reiniciar fechasData para cada línea de input.txt
-        std::ifstream archivo1("data.csv");
-
-        if (!archivo1.is_open()) {
-            std::cerr << "Error al abrir el archivo data.csv" << std::endl;
-            return;
-        }
-
-        // Leer fechas de data.csv
-        std::string linea1;
-        while (getline(archivo1, linea1)) {
-            Fecha fecha;
-            extraerFecha(linea1, fecha);
-            fechasData.push_back(fecha);
-        }
-
         Fecha fechaInput;
         extraerFecha(linea2, fechaInput);
 
@@ -71,15 +65,13 @@ void procesarArchivos(const char* inputFileName) {
             std::cout << "Se encontró una coincidencia exacta para la fecha en " << inputFileName << "." << std::endl;
         } else {
             // Buscar fecha más cercana
-            int mejorCoincidencia = buscarFechaCercana(fechasData, fechaInput);
+            Fecha fechaCercana = buscarFechaCercana(fechasData, fechaInput);
 
             std::cout << "No se encontró una coincidencia exacta para la fecha en " << inputFileName << "." << std::endl;
-            std::cout << "La fecha más cercana en data.csv es: " << fechasData[mejorCoincidencia].anio << "-"
-                      << fechasData[mejorCoincidencia].mes << "-" << fechasData[mejorCoincidencia].dia << std::endl;
+            std::cout << "La fecha más cercana en data.csv es: " << fechaCercana.anio << "-" << fechaCercana.mes << "-" << fechaCercana.dia << std::endl;
         }
-
-        archivo1.close(); // Cerrar archivo1 después de procesar cada línea de input.txt
     }
 
     archivo2.close();
 }
+
