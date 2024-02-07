@@ -1,76 +1,62 @@
 #include "BitcoinExchange.hpp"
+#include <fstream>
+#include <sstream>
 
-BitcoinExchange::BitcoinExchange()
-{
-    //std::cout << "BitcoinExchange default constructor called!" << std::endl;
-    return ;
-}
+void BitcoinExchange::loadDatabase(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file) {
+        // Handle error opening file
+        return;
+    }
 
-// BitcoinExchange::BitcoinExchange(const std::string &csvFileName)
-// {
-//     // try
-//     // {
-//     //     // Pass the second argument, which is a reference to exchangeRates
-//     //     loadExchangeRates(csvFileName, exchangeRates);
-//     // }
-//     // catch (const BitcoinException &e)
-//     // {
-//     //     // Propagate the exception with a more informative message
-//     //     throw BitcoinException("Error opening exchange rate file: " + std::string(e.what()));
-//     // }
-// }
-
-BitcoinExchange::BitcoinExchange(BitcoinExchange const &btc)
-{
-    //std::cout << "BitcoinExchange copy constructor called!" << std::endl;
-    exchangeRates = btc.exchangeRates;
-}
-
-BitcoinExchange::~BitcoinExchange()
-{
-    //std::cout << "BitcoinExchange destructor called!" << std::endl;
-    return ;
-}
-
-BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
-{
-    if (this != &other)
-        exchangeRates = other.exchangeRates;
-    return (*this);
-}
-
-// Implementación del método compareDates
-void BitcoinExchange::compareDates(const std::string &inputFileName)
-{
-    std::ifstream inputFile(inputFileName);
     std::string line;
-
-    if (!inputFile.is_open())
-    {
-        throw BitcoinException("Error opening input file");
-    }
-
-    while (std::getline(inputFile, line))
-    {
+    while (std::getline(file, line)) {
         std::istringstream iss(line);
-        std::string date, value;
+        std::string dateStr, valueStr;
 
-        // Leer fecha y valor desde el archivo input.txt
-        if (!(iss >> date >> value))
-        {
-            throw BitcoinException("Invalid format in input file");
+        if (std::getline(iss, dateStr, ',') && std::getline(iss, valueStr)) {
+            try {
+                float value = std::stof(valueStr);
+                exchangeRates[dateStr] = value;
+            } catch (const std::invalid_argument& e) {
+                // Handle invalid argument
+            } catch (const std::out_of_range& e) {
+                // Handle out of range
+            }
         }
+    }
+}
 
-        // Comprobar si la fecha existe en el mapa de tasas de cambio
-        if (exchangeRates.find(date) != exchangeRates.end())
-        {
-            std::cout << "Fecha encontrada: " << date << " Valor: " << exchangeRates[date] << std::endl;
-        }
-        else
-        {
-            std::cout << "Fecha no encontrada: " << date << std::endl;
+std::string BitcoinExchange::getClosestDate(const std::string& inputDate) const {
+    if (exchangeRates.empty()) {
+        return "";  // No closest date if the exchangeRates map is empty
+    }
+
+    std::map<std::string, float>::const_iterator it = exchangeRates.lower_bound(inputDate);
+
+    if (it == exchangeRates.begin()) {
+        return it->first;  // Input date is before the first date in the map
+    }
+
+    if (it == exchangeRates.end()) {
+        --it;  // Input date is after the last date in the map
+    } else {
+        // Check which date is closer, the one at 'it' or the one before it
+        std::map<std::string, float>::const_iterator prevIt = std::prev(it);
+        if (inputDate.compare(prevIt->first) - inputDate.compare(it->first) > 0) {
+            it = prevIt;
         }
     }
 
-    inputFile.close();
+    return it->first;
+}
+
+float BitcoinExchange::getExchangeRate(const std::string& date) const {
+    std::map<std::string, float>::const_iterator it = exchangeRates.find(date);
+    if (it != exchangeRates.end()) {
+        return it->second;
+    } else {
+        // Handle the case where the date is not found
+        return 0.0f; // Placeholder, replace with actual implementation
+    }
 }

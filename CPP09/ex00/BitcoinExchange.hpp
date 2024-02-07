@@ -1,42 +1,17 @@
 #ifndef BITCOINEXCHANGE_HPP
-# define BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
 
-# include <map>
-# include <string>
-# include <fstream>
-# include <sstream>
-# include <stdexcept>
-# include <vector>
-# include <iomanip>
-# include <iostream>
+#include <map>
+#include <string>
 
-class BitcoinExchange
-{
-    private:
-        std::map<std::string, float> exchangeRates;
-        
-    public:
-        BitcoinExchange();
-        // BitcoinExchange(const std::string &csvFileName);
-        BitcoinExchange(BitcoinExchange const &btc);
-        ~BitcoinExchange();
-        BitcoinExchange &operator=(const BitcoinExchange &other);
+class BitcoinExchange {
+public:
+    void loadDatabase(const std::string& filename);
+    std::string getClosestDate(const std::string& inputDate) const;
+    float getExchangeRate(const std::string& date) const;
 
-        class BitcoinException : public std::exception
-        {
-            private:
-                std::string message;
-            
-            public:
-                BitcoinException(const std::string &msg) : message(msg) {}
-                virtual const char *what() const throw()
-                {
-                    return (message.c_str());
-                }
-                virtual ~BitcoinException() throw() {}
-        };
-
-        void compareDates(const std::string &inputFileName);
+private:
+    std::map<std::string, float> exchangeRates;
 };
 
-#endif
+#endif 
