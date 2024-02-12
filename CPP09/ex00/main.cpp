@@ -9,6 +9,7 @@ float calculateResult(float inputValue, float exchangeRate)
 {
     return inputValue * exchangeRate;
 }
+
 std::tm parseDate(const std::string& dateStr)
 {
     std::tm tm = {};
@@ -19,49 +20,33 @@ std::tm parseDate(const std::string& dateStr)
 
     dateStream >> year >> dash1 >> month >> dash2 >> day;
     if (dateStream.fail() || dash1 != '-' || dash2 != '-')
-    {
         throw std::invalid_argument("Invalid date format");
-    }
     tm.tm_year = year - 1900; // Año desde 1900 en std::tm
     tm.tm_mon = month - 1;    // Meses en std::tm van de 0 a 11
     tm.tm_mday = day;
     // Validación del año (4 dígitos)
     if (tm.tm_year < 0 || tm.tm_year > 9999)
-    {
         throw std::invalid_argument("Invalid year format");
-    }
     // Validación del mes (rango de 0 a 11)
     if (tm.tm_mon < 0 || tm.tm_mon > 11)
-    {
         throw std::invalid_argument("Invalid month format");
-    }
     // Validación del día (rango de 1 a 31)
     if (tm.tm_mday < 1 || tm.tm_mday > 31)
-    {
         throw std::invalid_argument("Invalid day format");
-    }
     // Validación de días según el mes
     if ((tm.tm_mon == 0 || tm.tm_mon == 2 || tm.tm_mon == 4 || tm.tm_mon == 6 ||
          tm.tm_mon == 7 || tm.tm_mon == 9 || tm.tm_mon == 11) && tm.tm_mday > 31)
-         {
         throw std::invalid_argument("Invalid day for this month");
-    }
     else if ((tm.tm_mon == 3 || tm.tm_mon == 5 || tm.tm_mon == 8 || tm.tm_mon == 10) && tm.tm_mday > 30)
-    {
         throw std::invalid_argument("Invalid day for this month");
-    }
     else if (tm.tm_mon == 1)
     {
         // Febrero: 28 días en condiciones normales, 29 días en años bisiestos
         bool leapYear = (tm.tm_year % 4 == 0 && tm.tm_year % 100 != 0) || (tm.tm_year % 400 == 0);
         if (leapYear && tm.tm_mday > 29)
-        {
             throw std::invalid_argument("Invalid day for this month");
-        }
         else if (!leapYear && tm.tm_mday > 28)
-        {
             throw std::invalid_argument("Invalid day for this month");
-        }
     }
     return tm;
 }
@@ -104,21 +89,24 @@ int main(int argc, char *argv[])
         float value;
         if (std::getline(iss, dateStr, '|') && std::getline(iss, valueStr))
         {
+            std::istringstream valueStream(valueStr);
+            valueStream >> value;
+            if (valueStream.fail())
+            {
+                std::cerr << "Error: Invalid float value." << std::endl;
+                continue;
+            }
             try
             {
-                value = std::stof(valueStr);
                 // Validar el valor antes de continuar
                 if (!validateInput(value))
-                {
                     continue;
-                }
                 std::tm parsedDate = parseDate(dateStr);
                 std::ostringstream formattedDate;
                 formattedDate << std::put_time(&parsedDate, "%Y-%m-%d");
                 std::string parsedDateString = formattedDate.str();
                 std::string closestDate = exchange.getClosestDate(parsedDateString);
                 float exchangeRate = exchange.getExchangeRate(closestDate);
-                // std::cout << "For input date: " << parsedDateString << ", closest date in data.csv: " << closestDate << std::endl;
                 float result = calculateResult(value, exchangeRate);
                 if (result > std::numeric_limits<int>::max())
                 {
@@ -139,9 +127,7 @@ int main(int argc, char *argv[])
             }
         }
         else
-        {
             std::cerr << "Error: bad input => " << line << std::endl;
-        }
     }
     return 0;
 }
