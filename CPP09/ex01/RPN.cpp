@@ -2,6 +2,32 @@
 #include <sstream>
 #include <stdexcept>
 
+RPNCalculator::RPNCalculator()
+{
+    return;
+}
+
+RPNCalculator::~RPNCalculator()
+{
+    return;
+}
+
+RPNCalculator::RPNCalculator(RPNCalculator const &obj)
+{
+    *this = obj;
+    return;
+}
+
+RPNCalculator &RPNCalculator::operator=(RPNCalculator const &rhs)
+{
+    if (this != &rhs)
+    {
+        operandStack = std::stack<double>();
+        operandStack = rhs.operandStack;
+    }
+    return *this;
+}
+
 double RPNCalculator::evaluateRPN(const std::string &expression)
 {
     std::istringstream iss(expression);

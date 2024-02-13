@@ -2,6 +2,29 @@
 #include <fstream>
 #include <sstream>
 
+BitcoinExchange::BitcoinExchange()
+{
+    return;
+}
+
+BitcoinExchange::~BitcoinExchange()
+{
+    return;
+}
+
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &obj)
+{
+    *this = obj;
+    return;
+}
+
+BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs)
+{
+    if (this != &rhs)
+        this->exchangeRates = rhs.exchangeRates;
+    return *this;
+}
+
 void BitcoinExchange::loadDatabase(const std::string& filename)
 {
     std::ifstream file(filename);

@@ -8,6 +8,10 @@
 class RPNCalculator
 {
     public:
+        RPNCalculator();
+        ~RPNCalculator();
+        RPNCalculator(RPNCalculator const &obj);
+        RPNCalculator &operator=(RPNCalculator const &rhs);
         double evaluateRPN(const std::string &expression);
         class RPNException : public std::exception
         {
