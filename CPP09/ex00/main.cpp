@@ -21,6 +21,10 @@ std::tm parseDate(const std::string& dateStr)
     dateStream >> year >> dash1 >> month >> dash2 >> day;
     if (dateStream.fail() || dash1 != '-' || dash2 != '-')
         throw std::invalid_argument("Invalid date format");
+    // Validar si la fecha es anterior a 2009-01-02
+    if (year < 2009 || (year == 2009 && (month < 1 || (month == 1 && day < 2))))
+        throw std::invalid_argument("Out of bounds of the database");
+    
     tm.tm_year = year - 1900; // Año desde 1900 en std::tm
     tm.tm_mon = month - 1;    // Meses en std::tm van de 0 a 11
     tm.tm_mday = day;
