@@ -89,7 +89,7 @@ std::string PmergeMe::printVector(const std::vector<int> &vector)
     return out.str();
 }
 
-std::list<int> PmergeMe::insertMergeSortList(std::list<int> list)
+std::list<int> PmergeMe::insertList(std::list<int> &list)
 {
     std::list<int>::iterator it, j;
 

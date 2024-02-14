@@ -31,17 +31,6 @@ class PmergeMe
         static std::list<int> insertMergeSortList(std::list<int> list);
         static std::string printList(const std::list<int> &list);
 
-        // class Error : public std::exception
-        // {
-        //     private:
-        //         std::string _message;
-        //     public:
-        //         Error(const std::string &msg) throw() : _message(msg) {}
-        //         virtual const char *what() const throw()
-        //         {
-        //             return _message.c_str();
-        //         }
-        // };
         class Error : public std::exception
         {
             public:
