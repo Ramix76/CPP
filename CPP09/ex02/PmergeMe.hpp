@@ -3,19 +3,58 @@
 
 # include <iostream>
 # include <vector>
+# include <list>
+# include <ctime>
+# include <sstream>
+# include <iomanip>
+# include <iterator>
 
-class MergeInsertSort
+class PmergeMe
 {
     private:
-        std::vector<int> sequence;
+        PmergeMe();
+        ~PmergeMe();
+        PmergeMe(PmergeMe const &obj);
+        PmergeMe &operator=(PmergeMe const &rhs);
 
+        static std::vector<int> insertVector(std::vector<int> vector);
+        static std::vector<int> mergeVector(const std::vector<int> &left, const std::vector<int> &right);
+
+        static std::list<int> insertList(std::list<int> &list);
+        static std::list<int> mergeList(const std::list<int> &left, const std::list<int> &right);
     public:
-        MergeInsertSort();
-        void readSequence();
-        void mergeInsertSort();
-        void merge(const std::vector<int>& left, const std::vector<int>& right);
-        void printSortedSequence() const;
-        
+        static std::vector<int> createVector(char **argv);
+        static std::vector<int> insertMergeSortVector(std::vector<int> vector);
+        static std::string printVector(const std::vector<int> &vector);
+
+        static std::list<int> createList(char **argv);
+        static std::list<int> insertMergeSortList(std::list<int> list);
+        static std::string printList(const std::list<int> &list);
+
+        // class Error : public std::exception
+        // {
+        //     private:
+        //         std::string _message;
+        //     public:
+        //         Error(const std::string &msg) throw() : _message(msg) {}
+        //         virtual const char *what() const throw()
+        //         {
+        //             return _message.c_str();
+        //         }
+        // };
+        class Error : public std::exception
+        {
+            public:
+            Error(const std::string& message) : _errorMessage(message) {}
+                virtual const char* what() const throw()
+                {
+                    return _errorMessage.c_str();
+                }
+                virtual ~Error() throw() {}
+
+            private:
+                std::string _errorMessage;
+        };
 };
 
 #endif

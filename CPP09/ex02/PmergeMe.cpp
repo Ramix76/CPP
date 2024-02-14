@@ -1,65 +1,186 @@
 #include "PmergeMe.hpp"
 
-MergeInsertSort::MergeInsertSort() {}
+PmergeMe::PmergeMe() {}
 
-void MergeInsertSort::readSequence()
+PmergeMe::~PmergeMe() {}
+
+PmergeMe::PmergeMe(PmergeMe const &obj)
 {
-    int num;
+    (void)obj;
+    return ;
+}
 
-    std::cout << "Enter a positive integer sequence (enter a non-positive integer to stop):" << std::endl;
-    // Keep reading integers until a non-positive integer is entered
-    while (true)
+PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
+{
+    (void)rhs;
+    return *this;
+}
+
+std::vector<int> PmergeMe::insertVector(std::vector<int> vector)
+{
+    for (std::vector<int>::size_type i = 1; i < vector.size(); ++i)
     {
-        std::cin >> num;
-        if (num <= 0)
+        int tmp = vector[i];
+        std::vector<int>::size_type j = i;
+        while(j > 0 && vector[j - 1] > tmp)
         {
-            break;  // Stop reading when a non-positive integer is entered
+            vector[j] = vector[j - 1];
+            --j;
         }
-        sequence.push_back(num);
+        vector[j] = tmp;
     }
+    return vector;
 }
 
-void MergeInsertSort::mergeInsertSort()
+std::vector<int> PmergeMe::mergeVector(const std::vector<int> &left, const std::vector<int> &right)
 {
-   if (sequence.size() > 1)
-   {
-        int mid = sequence.size() / 2;
-        std::vector<int> left(sequence.begin(), sequence.begin() + mid);
-        std::vector<int> right(sequence.begin() + mid, sequence.end());
-        MergeInsertSort leftSorter;
-        leftSorter.sequence = left;
-        leftSorter.mergeInsertSort();
-        MergeInsertSort rightSorter;
-        rightSorter.sequence = right;
-        rightSorter.mergeInsertSort();
-        // Merge the sorted subarrays
-        merge(left, right);
-    }
-}
+    std::vector<int> mergedVector;
+    std::vector<int>::const_iterator itLeft = left.begin();
+    std::vector<int>::const_iterator itRight = right.begin();
 
-void MergeInsertSort::merge(const std::vector<int>& left, const std::vector<int>& right)
-{
-    size_t i = 0, j = 0, k = 0;
-
-    while (i < left.size() && j < right.size())
+    while (itLeft != left.end() && itRight != right.end())
     {
-        if (left[i] < right[j])
-            sequence[k++] = left[i++];
+        if (*itLeft < *itRight)
+        {
+            mergedVector.push_back(*itLeft);
+            ++itLeft;
+        }
         else
-            sequence[k++] = right[j++];
+        {
+            mergedVector.push_back(*itRight);
+            ++itRight;
+        }
     }
-    while (i < left.size())
-        sequence[k++] = left[i++];
-    while (j < right.size())
-        sequence[k++] = right[j++];
+    std::copy(itLeft, left.end(), std::back_inserter(mergedVector));
+    std::copy(itRight, right.end(), std::back_inserter(mergedVector));
+    return mergedVector;
 }
 
-void MergeInsertSort::printSortedSequence() const
+std::vector<int> PmergeMe::insertMergeSortVector(std::vector<int> vector)
 {
-     std::cout << "Sorted sequence: ";
-        for (size_t i = 0; i < sequence.size(); ++i)
+    if (vector.size() <= 5)
+        return PmergeMe::insertVector(vector);
+    else
+    {
+        std::vector<int>::size_type mid = vector.size() / 2;
+        std::vector<int> left(vector.begin(), vector.begin() + mid);
+        std::vector<int> right(vector.begin() + mid, vector.end());
+
+        std::vector<int> leftMerged = PmergeMe::insertMergeSortVector(left);
+        std::vector<int> rightMerged = PmergeMe::insertMergeSortVector(right);
+
+        return PmergeMe::mergeVector(leftMerged, rightMerged);
+    }
+}
+
+std::string PmergeMe::printVector(const std::vector<int> &vector)
+{
+    std::ostringstream out;
+
+    for (std::vector<int>::size_type i = 0; i < vector.size(); ++i)
+    {
+        if (i > 10)
         {
-            std::cout << sequence[i] << " ";
+            out << "[...]";
+            break;
         }
-        std::cout << std::endl;   
+        out << vector[i] << " ";
+    }
+    return out.str();
+}
+
+std::list<int> PmergeMe::insertMergeSortList(std::list<int> list)
+{
+    std::list<int>::iterator it, j;
+
+    for (it = ++list.begin(); it != list.end(); ++it)
+    {
+        int tmp = *it;
+        j = it;
+        while (j != list.begin() && *std::prev(j) > tmp)
+        {
+            *j = *(std::prev(j));
+            --j;
+        }
+        *j = tmp;
+    }
+    return list;
+}
+
+std::list<int> PmergeMe::mergeList(const std::list<int> &left, const std::list<int> &right)
+{
+    std::list<int> mergedList;
+    std::list<int>::const_iterator itLeft = left.begin();
+    std::list<int>::const_iterator itRight = right.begin();
+
+    while (itLeft != left.end() && itRight != right.end())
+    {
+        if (*itLeft < *itRight)
+        {
+            mergedList.push_back(*itLeft);
+            ++itLeft;
+        }
+        else
+        {
+            mergedList.push_back(*itRight);
+            ++itRight;
+        }
+    }
+    mergedList.insert(mergedList.end(), itLeft, left.end());
+    mergedList.insert(mergedList.end(), itRight, right.end());
+
+    return mergedList;
+}
+
+std::list<int> PmergeMe::insertMergeSortList(std::list<int> list)
+{
+    if (list.size() <= 5)
+        return PmergeMe::insertList(list);
+    else
+    {
+        std::list<int>::size_type mid = list.size() / 2;
+        std::list<int> left(list.begin(), ++std::next(list.begin(), mid));
+        std::list<int> right(++std::next(list.begin(), mid), list.end());
+
+        std::list<int> leftMerged = PmergeMe::insertMergeSortList(left);
+        std::list<int> rightMerged = PmergeMe::insertMergeSortList(right);
+
+        return PmergeMe::mergeList(leftMerged, rightMerged);
+    }
+}
+
+std::string PmergeMe::printList(const std::list<int> &list)
+{
+    std::ostringstream out;
+    int counter = 0;
+
+    for (std::list<int>::const_iterator it = list.begin(); it != list.end(); ++it)
+    {
+        if (counter > 10)
+        {
+            out << "[...]";
+            break;
+        }
+        out << *it << " ";
+        ++counter;
+    }
+    return out.str();
+}
+
+std::vector<int>	PmergeMe::createVector(char **argv){
+	std::vector<int>	vector;
+
+	for (int i = 1; argv[i]; i++) {
+		vector.insert(vector.end(), atoi(argv[i]));
+	}
+	return (vector);
+}
+
+std::list<int>	PmergeMe::createList(char **argv){
+	std::list<int>	list;
+
+	for (int i = 1; argv[i]; i++) {
+		list.push_back(atoi(argv[i]));
+	}
+	return (list);
 }
