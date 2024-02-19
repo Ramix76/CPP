@@ -78,14 +78,7 @@ std::string PmergeMe::printVector(const std::vector<int> &vector)
     std::ostringstream out;
 
     for (std::vector<int>::size_type i = 0; i < vector.size(); ++i)
-    {
-        if (i > 10)
-        {
-            out << "[...]";
-            break;
-        }
         out << vector[i] << " ";
-    }
     return out.str();
 }
 
@@ -152,18 +145,9 @@ std::list<int> PmergeMe::insertMergeSortList(std::list<int> list)
 std::string PmergeMe::printList(const std::list<int> &list)
 {
     std::ostringstream out;
-    int counter = 0;
 
     for (std::list<int>::const_iterator it = list.begin(); it != list.end(); ++it)
-    {
-        if (counter > 10)
-        {
-            out << "[...]";
-            break;
-        }
         out << *it << " ";
-        ++counter;
-    }
     return out.str();
 }
 
