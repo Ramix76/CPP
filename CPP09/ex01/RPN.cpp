@@ -20,11 +20,7 @@ RPNCalculator::RPNCalculator(RPNCalculator const &obj)
 
 RPNCalculator &RPNCalculator::operator=(RPNCalculator const &rhs)
 {
-    if (this != &rhs)
-    {
-        operandStack = std::stack<double>();
-        operandStack = rhs.operandStack;
-    }
+    (void)rhs;
     return *this;
 }
 

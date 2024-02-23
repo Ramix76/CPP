@@ -65,6 +65,8 @@ std::string BitcoinExchange::getClosestDate(const std::string& inputDate) const
     {
         // Check which date is closer, the one at 'it' or the one before it
         std::map<std::string, float>::const_iterator prevIt = std::prev(it);
+        if (inputDate.compare(it->first) == 0)
+            return it->first;
         if (inputDate.compare(prevIt->first) - inputDate.compare(it->first) > 0)
             it = prevIt;
     }
